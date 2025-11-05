@@ -9,6 +9,7 @@ export const TMDB_CONFIG = {
     }
 }
 
+
 export const fetchMovies = async ({ query }: { query: string }) => {
     const endpoint = query ? `${TMDB_CONFIG.BASE_URL}/search/movie?query=${encodeURIComponent(query)}` : `${TMDB_CONFIG.BASE_URL}/movie/popular?language=en-US&page=1`;
 
@@ -28,5 +29,27 @@ export const fetchMovies = async ({ query }: { query: string }) => {
 
     return data.results;
 }
+
+export const fetchTrendingMovies = async () => {
+    const endpoint = `${TMDB_CONFIG.BASE_URL}/trending/movie/day?language=en-US`;
+
+    // console.log('Fetching from endpoint:', endpoint);
+    // console.log('Using headers:', TMDB_CONFIG.headers);
+
+    const response = await fetch(endpoint, {
+        method: "GET",
+        headers: TMDB_CONFIG.headers,
+    });
+
+    if (!response.ok) {
+        throw new Error(`Failed to fetch movies: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+
+    return data.results;
+}
+
+
 
 

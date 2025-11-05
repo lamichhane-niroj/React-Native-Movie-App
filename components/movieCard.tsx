@@ -6,7 +6,8 @@ import { Image, Text, TouchableOpacity, View } from "react-native"
 
 const MovieCard = ({ id, poster_path, title, vote_average, release_date } : Movie) => {
     return (
-        <Link href={`/movie/${id}`} asChild>
+    // cast href to any to bypass typedRoutes typing when dynamic routes cause type mismatch
+    <Link href={`/movie/${id}` as any} asChild>
             <TouchableOpacity className='w-[30%]'>
                 <Image source={{ uri: poster_path ? `https://image.tmdb.org/t/p/w500${poster_path}` : `https://placeholder/600x400/1a1a1a/ffffff.png` }}
                 className='w-full h-52 rounded-lg'
@@ -32,3 +33,8 @@ const MovieCard = ({ id, poster_path, title, vote_average, release_date } : Movi
 }
 
 export default MovieCard
+
+// EXPO_PUBLIC_APPWRITE_PROJECT_ID=690a07b70031971a568e 
+// EXPO_PUBLIC_APPWRITE_PROJECT_NAME="react_movie_app"
+// EXPO_PUBLIC_APPWRITE_ENDPOINT=https://fra.cloud.appwrite.io/v1
+// EXPO_PUBLIC_APPWRITE_DATABASE_ID="690b4a0900076980f74f"
